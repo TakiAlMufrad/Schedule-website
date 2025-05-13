@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Schedule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@latest"></script>
+    <style>
+        /* Basic styling for the embedded calendar */
+        .calendar-container {
+            width: 90%;
+            height: 90vh;
+            max-width: 90%;
+            margin: 1rem auto;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        body {
+            margin: 0;
+            overflow: auto;
+        }
+        /* Style the iframe */
+        iframe {
+            background-color: #1a202c;
+        }
+        .header {
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            background-color: #2d3748;
+            border-bottom: 1px solid #4a5568;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Vertically center items */
+            justify-content: center; /* Center the title */
+            position: relative; /* Needed for absolute positioning of logo and dropdown */
+        }
+        .header h1 {
+            margin: 0; /* Remove default margin from the heading */
+            margin-left: auto; /* Push the heading to the center */
+            margin-right: auto;
+        }
+        .logo {
+            position: absolute; /* Position the logo absolutely within the header */
+            left: 1rem; /* Position it 1rem from the left */
+            top: 50%; /* Vertically center it initially */
+            transform: translateY(-50%); /* Precise vertical centering */
+            height: 2rem; /* Set a height for the logo */
+            cursor: pointer; /* Show a pointer cursor on hover */
+        }
+        .dropdown {
+            position: absolute;
+            top: 100%; /* Position below the header */
+            left: 1rem;
+            background-color: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
+            display: none; /* Initially hidden */
+            z-index: 10; /* Ensure it's above other elements */
+            width: 180px; /* Adjust as needed */
+        }
+        .dropdown.show {
+            display: block; /* Show the dropdown when the 'show' class is added */
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .dropdown-item:hover {
+            background-color: #4a5568;
+        }
+        .dropdown-item img {
+            height: 1.5rem; /* Adjust icon size as needed */
+            margin-right: 0.75rem;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-900 font-sans antialiased">
+    <div class="header">
+        <img class="logo" src="logo.png" alt="Your Logo">
+        <h1>TakiTheRuimach's Schedule</h1>
+        <div class="dropdown" id="myDropdown">
+            <a href="https://takitheruimach.vercel.app" class="dropdown-item">
+                <img src="web.png" alt="Website"> Website
+            </a>
+            <a href="https://discordapp.com/users/845153615403810846" class="dropdown-item">
+                <img src="discord.png" alt="Discord"> Discord
+            </a>
+            <a href="https://www.youtube.com/@taki_the_ruimach" class="dropdown-item">
+                <img src="yt.png" alt="YouTube"> YouTube
+            </a>
+        </div>
+    </div>
+    <div class="calendar-container">
+        <iframe
+            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FDhaka&showPrint=0&title=TakiTheRuimach's%20Schedule&mode=WEEK&src=dGFraXJvY2szNDM2QGdtYWlsLmNvbQ&src=ZmFtaWx5MDE0NzU5MDQ1NDI5OTYxODI4NzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4uYmQjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%23C0CA33&color=%23E4C441"
+            style="border:0"
+            frameborder="0"
+            scrolling="no">
+        </iframe>
+    </div>
+    <script>
+        const logo = document.querySelector('.logo');
+        const dropdown = document.getElementById('myDropdown');
+
+        logo.addEventListener('click', () => {
+            dropdown.classList.toggle('show');
+        });
+
+        // Close the dropdown if the user clicks outside of it
+        window.addEventListener('click', (event) => {
+            if (!event.target.closest('.logo') && !event.target.closest('.dropdown')) {
+                dropdown.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
